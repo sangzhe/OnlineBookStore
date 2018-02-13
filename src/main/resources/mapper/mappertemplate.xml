@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.springbootmybatis.DAO.StudentMapper">
+    <resultMap id="BaseResultMap" type="com.springbootmybatis.Model.Student">
+        <id column="ID" property="ID" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="dept_name" property="department" jdbcType="VARCHAR"/>
+        <result column="tot_cred" property="totalCredit" jdbcType="DECIMAL"/>
+    </resultMap>
+    <resultMap id="allStudent" type="com.springbootmybatis.Model.Student">
+        <id column="ID" property="ID" jdbcType="VARCHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="dept_name" property="department" jdbcType="VARCHAR"/>
+        <result column="tot_cred" property="totalCredit" jdbcType="DECIMAL"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        ID,name,dept_name,tot_cred
+    </sql>
+
+    <!--&lt;!&ndash;================测试用：生成user===================&ndash;&gt;-->
+    <!--<insert id="insertUser" parameterType="com.xinput.entity.User">-->
+    <!--insert into user-->
+    <!--<trim prefix="(" suffix=")" suffixOverrides=",">-->
+    <!--<if test="userId != null">user_id,</if>-->
+    <!--<if test="userName != null">user_name,</if>-->
+    <!--<if test="address != null">address,</if>-->
+    <!--</trim>-->
+    <!--<trim prefix="values (" suffix=")" suffixOverrides=",">-->
+    <!--<if test="userId != null">#{userId,jdbcType=INTEGER},</if>-->
+    <!--<if test="userName != null">#{userName,jdbcType=VARCHAR},</if>-->
+    <!--<if test="address != null">#{address,jdbcType=VARCHAR},</if>-->
+    <!--</trim>-->
+    <!--</insert>-->
+
+    <!--================根据主键查商户===================-->
+    <!--<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">-->
+    <!--select-->
+    <!--<include refid="Base_Column_List"/>-->
+    <!--from user-->
+    <!--where user_id = #{userId,jdbcType=CHAR}-->
+    <!--</select>-->
+
+    <!--================根据name查商户===================-->
+    <select id="getStudentByID" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from student
+        where ID = #{ID,jdbcType=VARCHAR}
+    </select>
+
+    <select id="getAllStudents" resultMap="allStudent" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from student
+    </select>
+</mapper>
