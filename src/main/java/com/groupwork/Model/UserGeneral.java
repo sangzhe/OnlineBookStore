@@ -1,35 +1,35 @@
 package com.groupwork.Model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * Created by sangzhe on 2018/4/5.
  */
 public class UserGeneral implements Serializable{
-    private int Id;
+    private String Id;
     private String Gender;
     private String LastName;
     private String FirstName;
     private Date Birth;
+    private Timestamp CreateDate;
 
-    public UserGeneral(int id) {
-        Id = id;
-    }
 
-    public UserGeneral(int id, String gender, String lastName, String firstName, Date birth) {
+    public UserGeneral(String id, String gender, String lastName, String firstName, Date birth, Timestamp createDate) {
         Id = id;
         Gender = gender;
         LastName = lastName;
         FirstName = firstName;
         Birth = birth;
+        CreateDate = createDate;
     }
 
-    public int getId() {
+    public String getId() {
         return Id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         Id = id;
     }
 
@@ -63,5 +63,13 @@ public class UserGeneral implements Serializable{
 
     public void setBirth(Date birth) {
         Birth = birth;
+    }
+
+    public Timestamp getCreateDate() {
+        return CreateDate;
+    }
+
+    public void setCreateDate(Timestamp createDate) {
+        CreateDate = createDate;
     }
 }

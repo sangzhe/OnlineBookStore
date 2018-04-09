@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.groupwork.Mapper.UserSecurityMapper">
+    <resultMap id="UserSecurityResult" type="com.groupwork.Model.UserSecurity">
+        <id column="email" property="Email" jdbcType="VARCHAR"/>
+        <result column="password" property="Password" jdbcType="VARCHAR"/>
+        <result column="user_id" property="UserId" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+
+    <!--================email查密码和id===================-->
+    <select id="getUserSecurityByEmail" resultMap="UserSecurityResult" parameterType="java.lang.String">
+        select
+        email,password,user_id
+        from user_security
+        where Email = #{Email,jdbcType=VARCHAR}
+    </select>
+
+    <select id="getUserSecurityById" resultMap="UserSecurityResult" parameterType="java.lang.String">
+        SELECT email,password,user_id
+        FROM user_security
+        WHERE user_id = #{Id,jdbcType=VARCHAR}
+    </select>
+    
+    <update id="updateUserPassword" parameterType="com.groupwork.Model.UserSecurity">
+        UPDATE user_security SET password = #{Password,jdbcType=VARCHAR} WHERE email = #{Email,jdbcType=VARCHAR}
+    </update>
+
+
+    <insert id="insertNewUserSecurity" parameterType="com.groupwork.Model.UserSecurity">
+        INSERT INTO user_security(email,password,user_id) VALUES(#{Email},#{Password},#{UserId})
+    </insert>
+</mapper>

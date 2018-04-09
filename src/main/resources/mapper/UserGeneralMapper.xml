@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.groupwork.Mapper.UserGeneralMapper">
+    <resultMap id="UserGeneralResult" type="com.groupwork.Model.UserGeneral">
+        <id column="id" property="Id" jdbcType="VARCHAR"/>
+        <result column="gender" property="Gender" jdbcType="VARCHAR"/>
+        <result column="last_name" property="LastName" jdbcType="VARCHAR"/>
+        <result column="firt_name" property="FirstName" jdbcType="VARCHAR"/>
+        <result column="birth" property="Birth" jdbcType="DATE" />
+        <result column="create_date" property="CreateDate" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--================根据name查商户===================-->
+    <select id="getUserById" resultMap="UserGeneralResult" parameterType="java.lang.String">
+        select
+        id,gender,last_name,first_name,birth,create_date
+        from user_general
+        where id = #{Id,jdbcType=VARCHAR}
+    </select>
+
+    <insert id="insertNewUserGeneral" parameterType="java.lang.String">
+        INSERT INTO user_general(id) VALUES(#{Id})
+    </insert>
+
+    <update id="updateUserGeneral" parameterType="com.groupwork.Model.UserGeneral">
+        update user_general
+        <set>
+            <if test="Gender != null">gender= #{Gender,jdbcType=VARCHAR},</if>
+            <if test="LastName != null">last_name = #{LastName,jdbcType=VARCHAR},</if>
+            <if test="FirstName != null">first_name= #{FirstName,jdbcType=VARCHAR},</if>
+            <if test="Birth != null">birth=#{Birth,jdbcType=DATE},</if>
+
+        </set>
+        where
+        id = #{Id,jdbcType=VARCHAR}
+    </update>
+
+</mapper>

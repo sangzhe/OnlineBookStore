@@ -1,13 +1,14 @@
 package com.groupwork.Model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
+import java.util.UUID;
 
 /**
  * Created by sangzhe on 2018/4/5.
  */
 public class Order implements Serializable{
-    private int Id;
+    private String Id;
     private OrderDetail OrderDetail;
     private UserGeneral User;
     private Address ShippingAddress;
@@ -16,7 +17,7 @@ public class Order implements Serializable{
     private Date OrderDate;
     private float OrderPrice;
 
-    public Order(int id, com.groupwork.Model.OrderDetail orderDetail, UserGeneral user, Address shippingAddress, Address billingAddress, com.groupwork.Model.Payment payment, Date orderDate, float orderPrice) {
+    public Order(String id, com.groupwork.Model.OrderDetail orderDetail, UserGeneral user, Address shippingAddress, Address billingAddress, com.groupwork.Model.Payment payment, Date orderDate, float orderPrice) {
         Id = id;
         OrderDetail = orderDetail;
         User = user;
@@ -27,11 +28,22 @@ public class Order implements Serializable{
         OrderPrice = orderPrice;
     }
 
-    public int getId() {
+    public Order(com.groupwork.Model.OrderDetail orderDetail, UserGeneral user, Address shippingAddress, Address billingAddress, com.groupwork.Model.Payment payment, float orderPrice) {
+        Id = UUID.randomUUID().toString();
+        OrderDetail = orderDetail;
+        User = user;
+        ShippingAddress = shippingAddress;
+        BillingAddress = billingAddress;
+        Payment = payment;
+        OrderDate = new Date(new java.util.Date().getTime());
+        OrderPrice = orderPrice;
+    }
+
+    public String getId() {
         return Id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         Id = id;
     }
 

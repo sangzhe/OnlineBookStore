@@ -8,10 +8,13 @@ import java.io.Serializable;
 public class UserPayment implements Serializable {
     private UserGeneral User;
     private Payment Payment;
+    private boolean IsInUse;
 
-    public UserPayment(UserGeneral user, com.groupwork.Model.Payment payment) {
+
+    public UserPayment(UserGeneral user, com.groupwork.Model.Payment payment, boolean isInUse) {
         User = user;
         Payment = payment;
+        IsInUse = isInUse;
     }
 
     public UserGeneral getUser() {
@@ -28,5 +31,13 @@ public class UserPayment implements Serializable {
 
     public void setPayment(com.groupwork.Model.Payment payment) {
         Payment = payment;
+    }
+
+    public boolean isInUse() {
+        return IsInUse;
+    }
+
+    public void setInUse(boolean inUse) {
+        IsInUse = inUse;
     }
 }

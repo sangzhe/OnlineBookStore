@@ -6,22 +6,22 @@ import java.io.Serializable;
  * Created by sangzhe on 2018/4/5.
  */
 public class OrderDetail implements Serializable {
-    private int Id;
+    private String Id;
     private Book Book;
-    private int BookNumber;
+    private int BookAmount;
 
-    public OrderDetail(int id, com.groupwork.Model.Book book, int bookNumber) {
+    public OrderDetail(String id, com.groupwork.Model.Book book, int bookAmount) {
         Id = id;
         Book = book;
-        BookNumber = bookNumber;
+        BookAmount = bookAmount;
     }
 
-    public int getId() {
-        return Id;
-    }
-
-    public void setId(int id) {
+    public void setId(String id) {
         Id = id;
+    }
+
+    public String getId() {
+        return Id;
     }
 
     public com.groupwork.Model.Book getBook() {
@@ -32,11 +32,11 @@ public class OrderDetail implements Serializable {
         Book = book;
     }
 
-    public int getBookNumber() {
-        return BookNumber;
+    public int getBookAmount() {
+        return BookAmount;
     }
 
-    public void setBookNumber(int bookNumber) {
-        BookNumber = bookNumber;
+    public void setBookAmount(int bookAmount) {
+        BookAmount = bookAmount;
     }
 }

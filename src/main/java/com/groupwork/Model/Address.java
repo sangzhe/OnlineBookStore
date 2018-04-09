@@ -1,19 +1,20 @@
 package com.groupwork.Model;
 
 import java.io.Serializable;
+import java.util.UUID;
 
 /**
  * Created by sangzhe on 2018/4/5.
  */
 public class Address implements Serializable {
-    private int Id;
+    private String Id;
     private String Street;
     private String Street2;
     private String City;
     private String State;
     private int Zipcode;
 
-    public Address(int id, String street, String street2, String city, String state, int zipcode) {
+    public Address(String id, String street, String street2, String city, String state, int zipcode) {
         Id = id;
         Street = street;
         Street2 = street2;
@@ -22,11 +23,20 @@ public class Address implements Serializable {
         Zipcode = zipcode;
     }
 
-    public int getId() {
+    public Address(String street, String street2, String city, String state, int zipcode) {
+        Id = UUID.randomUUID().toString();
+        Street = street;
+        Street2 = street2;
+        City = city;
+        State = state;
+        Zipcode = zipcode;
+    }
+
+    public String getId() {
         return Id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         Id = id;
     }
 

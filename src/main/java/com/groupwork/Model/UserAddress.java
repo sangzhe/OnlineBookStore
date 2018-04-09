@@ -8,10 +8,12 @@ import java.io.Serializable;
 public class UserAddress implements Serializable {
     private UserGeneral User;
     private Address Address;
+    private boolean IsInUse;
 
-    public UserAddress(UserGeneral user, com.groupwork.Model.Address address) {
+    public UserAddress(UserGeneral user, com.groupwork.Model.Address address, boolean isInUse) {
         User = user;
         Address = address;
+        IsInUse = isInUse;
     }
 
     public UserGeneral getUser() {
@@ -28,5 +30,13 @@ public class UserAddress implements Serializable {
 
     public void setAddress(com.groupwork.Model.Address address) {
         Address = address;
+    }
+
+    public boolean isInUse() {
+        return IsInUse;
+    }
+
+    public void setInUse(boolean inUse) {
+        IsInUse = inUse;
     }
 }

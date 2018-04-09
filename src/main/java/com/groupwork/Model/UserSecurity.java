@@ -2,26 +2,34 @@ package com.groupwork.Model;
 
 import java.io.Serializable;
 
+import java.util.UUID;
+
 /**
  * Created by sangzhe on 2018/4/5.
  */
 public class UserSecurity implements Serializable {
-    private int UserGeneralId;
+    private String UserId;
     private String Email;
-    private  String password;
+    private  String Password;
 
-    public UserSecurity(int userGeneralId, String email, String password) {
-        UserGeneralId = userGeneralId;
+    public UserSecurity(String userID, String email, String password) {
+        UserId = userID;
         Email = email;
-        this.password = password;
+        this.Password = password;
     }
 
-    public int getUserGeneralId() {
-        return UserGeneralId;
+    public UserSecurity(String email, String password) {
+        UserId = UUID.randomUUID().toString();
+        Email = email;
+        this.Password = password;
     }
 
-    public void setUserGeneralId(int userGeneralId) {
-        UserGeneralId = userGeneralId;
+    public String getUserId() {
+        return UserId;
+    }
+
+    public void setUserID(String userID) {
+        UserId = userID;
     }
 
     public String getEmail() {
@@ -33,10 +41,10 @@ public class UserSecurity implements Serializable {
     }
 
     public String getPassword() {
-        return password;
+        return Password;
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        Password = password;
     }
 }
