@@ -11,6 +11,7 @@ public class UserSecurity implements Serializable {
     private String UserId;
     private String Email;
     private  String Password;
+    private String roles="User";
 
     public UserSecurity(String userID, String email, String password) {
         UserId = userID;

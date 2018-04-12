@@ -5,7 +5,7 @@ package com.groupwork.Model;
  */
 public class Constants {
     public static int EXPIRE=24;
-    public static String AUTHORIZATION = "LoginRequired";
+    public static String AUTHORIZATION = "Token";
 
 
 }

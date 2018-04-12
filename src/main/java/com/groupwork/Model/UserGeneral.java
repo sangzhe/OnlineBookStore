@@ -72,4 +72,16 @@ public class UserGeneral implements Serializable{
     public void setCreateDate(Timestamp createDate) {
         CreateDate = createDate;
     }
+
+    @Override
+    public String toString() {
+        return "UserGeneral{" +
+                "Id='" + Id + '\'' +
+                ", Gender='" + Gender + '\'' +
+                ", LastName='" + LastName + '\'' +
+                ", FirstName='" + FirstName + '\'' +
+                ", Birth=" + Birth +
+                ", CreateDate=" + CreateDate +
+                '}';
+    }
 }

@@ -1,7 +1,7 @@
 package com.groupwork.Model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  * Created by sangzhe on 2018/4/5.
@@ -19,9 +19,8 @@ public class Book implements Serializable {
     private String Description;
     private String PicUrl;
     private int ISBN;
-    private int Stock;
 
-    public Book(int id, String name, String category, String author, Date pubDate, String press, float price, int totalComments, float rate, String description, String picUrl, int ISBN, int stock) {
+    public Book(int id, String name, String category, String author, Date pubDate, String press, float price, int totalComments, float rate, String description, String picUrl, int ISBN) {
         Id = id;
         Name = name;
         Category = category;
@@ -34,7 +33,14 @@ public class Book implements Serializable {
         Description = description;
         PicUrl = picUrl;
         this.ISBN = ISBN;
-        Stock = stock;
+    }
+
+    public Book(int id, String name, String author, float price, String picUrl) {
+        Id = id;
+        Name = name;
+        Author = author;
+        Price = price;
+        PicUrl = picUrl;
     }
 
     public int getId() {
@@ -133,11 +139,21 @@ public class Book implements Serializable {
         this.ISBN = ISBN;
     }
 
-    public int getStock() {
-        return Stock;
-    }
-
-    public void setStock(int stock) {
-        Stock = stock;
+    @Override
+    public String toString() {
+        return "Book{" +
+                "Id=" + Id +
+                ", Name='" + Name + '\'' +
+                ", Category='" + Category + '\'' +
+                ", Author='" + Author + '\'' +
+                ", PubDate=" + PubDate +
+                ", Press='" + Press + '\'' +
+                ", Price=" + Price +
+                ", TotalComments=" + TotalComments +
+                ", Rate=" + Rate +
+                ", Description='" + Description + '\'' +
+                ", PicUrl='" + PicUrl + '\'' +
+                ", ISBN=" + ISBN +
+                '}';
     }
 }

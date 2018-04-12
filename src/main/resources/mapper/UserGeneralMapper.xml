@@ -7,7 +7,7 @@
         <result column="last_name" property="LastName" jdbcType="VARCHAR"/>
         <result column="firt_name" property="FirstName" jdbcType="VARCHAR"/>
         <result column="birth" property="Birth" jdbcType="DATE" />
-        <result column="create_date" property="CreateDate" jdbcType="TIMESTAMP"/>
+        <result column="create_date" property="CreateDate" jdbcType="TIMESTAMP" javaType="java.sql.Timestamp"/>
     </resultMap>
 
     <!--================根据name查商户===================-->
@@ -16,6 +16,13 @@
         id,gender,last_name,first_name,birth,create_date
         from user_general
         where id = #{Id,jdbcType=VARCHAR}
+    </select>
+
+    <select id="getUserByEmail" resultMap="UserGeneralResult" parameterType="java.lang.String">
+        SELECT
+        id,gender,last_name,first_name,birth,create_date
+        from user_general
+        WHERE id =(SELECT user_id FROM user_security WHERE email=#{Email,jdbcType=VARCHAR})
     </select>
 
     <insert id="insertNewUserGeneral" parameterType="java.lang.String">

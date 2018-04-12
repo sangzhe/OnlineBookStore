@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.groupwork.Mapper.BookMapper">
+    <resultMap id="BookIntro" type="com.groupwork.Model.Book">
+        <id column="id" property="Id" jdbcType="INTEGER"/>
+        <result column="name" property="Name" jdbcType="VARCHAR"/>
+        <result column="new_price" property="Price" jdbcType="FLOAT"/>
+        <result column="pic_link" property="PicUrl" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--<resultMap id="BookResult" type="com.groupwork.Model.Book">-->
+        <!--<id column="id" property="Id" jdbcType="INTEGER"/>-->
+        <!--<result column="category" property="Category" jdbcType="VARCHAR"/>-->
+        <!--<result column="name" property="Name" jdbcType="VARCHAR"/>-->
+        <!--<result column="author" property="Author" jdbcType="VARCHAR"/>-->
+        <!--<result column="pub_date" property="PubDate" jdbcType="DATE"/>-->
+        <!--<result column="press" property="Press" jdbcType="VARCHAR"/>-->
+        <!--<result column="new_price" property="Price" jdbcType="FLOAT"/>-->
+        <!--<result column="total_comments" property="TotalComments" jdbcType="INTEGER"/>-->
+        <!--<result column="rate" property="Rate" jdbcType="FLOAT"/>-->
+        <!--<result column="description" property="Description" jdbcType="VARCHAR"/>-->
+        <!--<result column="isbn" property="ISBN" jdbcType="INTEGER"/>-->
+        <!--<result column="pic_link" property="PicUrl" jdbcType="VARCHAR"/>-->
+    <!--</resultMap>-->
+
+    <!---->
+
+    <select id="getBookDetailById" resultType="com.groupwork.Model.Book" parameterType="java.lang.Integer">
+        SELECT *
+        FROM book
+        WHERE id= #{Id,jdbcType=INTEGER}
+    </select>
+
+    <select id="getBooks" resultMap="BookIntro">
+        SELECT id,name,author,new_price,pic_link
+        from book
+        <where>
+            <if test="name != null">
+                name LIKE #{name}
+            </if>
+            <if test="category!=null">
+                AND category = #{category}
+            </if>
+            <if test="author != null">
+                AND author like #{author}
+            </if>
+        </where>
+        ORDER BY ${sortBy}
+        LIMIT ${limit},${offset}
+    </select>
+
+
+
+
+
+</mapper>

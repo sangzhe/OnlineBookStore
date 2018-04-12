@@ -16,5 +16,5 @@ public interface UserGeneralMapper {
 
     int insertNewUserGeneral(String Id);
 
-
+    UserGeneral getUserByEmail(String Email);
 }

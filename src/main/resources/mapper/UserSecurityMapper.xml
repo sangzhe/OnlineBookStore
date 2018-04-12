@@ -21,6 +21,8 @@
         FROM user_security
         WHERE user_id = #{Id,jdbcType=VARCHAR}
     </select>
+
+
     
     <update id="updateUserPassword" parameterType="com.groupwork.Model.UserSecurity">
         UPDATE user_security SET password = #{Password,jdbcType=VARCHAR} WHERE email = #{Email,jdbcType=VARCHAR}

@@ -5,6 +5,8 @@ import com.groupwork.Mapper.UserSecurityMapper;
 import com.groupwork.Model.UserGeneral;
 import com.groupwork.Model.UserSecurity;
 import com.groupwork.Util.MD5utils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,6 +19,8 @@ import java.util.Map;
  */
 @Service
 public class UserService {
+    private static final Logger _logger = LoggerFactory.getLogger(UserService.class);
+
     @Autowired
     UserSecurityMapper userSecurityMapper;
     @Autowired
@@ -65,8 +69,9 @@ public class UserService {
         return userSecurityMapper.updateUserPassword(user);
 
     }
-    public UserGeneral getUserGeneralById(String Id){
-        return userGeneralMapper.getUserById(Id);
+
+    public UserGeneral getUserGeneralByEmail(String Email){
+        return userGeneralMapper.getUserByEmail(Email);
     }
 
     public int modifyUserProfile(String Id, Map<String,String> attributes){
@@ -82,5 +87,6 @@ public class UserService {
 
         return userGeneralMapper.updateUserGeneral(user);
     }
+
 
 }
