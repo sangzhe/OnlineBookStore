@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.groupwork.Mapper.OrderMapper">
+    <resultMap id="AddressResult" type="com.groupwork.Model.Address">
+        <id column="id" property="Id"/>
+        <result column="street" property="Street"/>
+        <result column="street2" property="Street2"/>
+        <result column="city" property="City"/>
+        <result column="state" property="State"/>
+        <result column="zipcode" property="Zipcode"/>
+    </resultMap>
+
+    <resultMap id="OrderResult" type="com.groupwork.Model.Order">
+        <id column="id" property="Id" jdbcType="VARCHAR"/>
+        <result column="date" property="Date" jdbcType="DATE"/>
+        <result column="order_price" property="OrderPrice" jdbcType="FLOAT"/>
+        <association property="User" javaType="com.groupwork.Model.UserGeneral">
+            <id column="user_id" property="Id" jdbcType="VARCHAR"/>
+        </association>
+        <association property="ShippingAddress" resultMap="AddressResult"/>
+        <association property="BillingAddress" resultMap="AddressResult"/>
+        <association property="Payment" javaType="com.groupwork.Model.Payment">
+            <id column="payment_id" property="Id"/>
+            <result column="card_number" property="CardNumber"/>
+            <result column="last_name" property="LastName"/>
+            <result column="first_name" property="FirstName"/>
+            <result column="security_number" property="SecurityNumber"/>
+            <result column="expire" property="Expire"/>
+            <result column="zipcode" property="Zipcode"/>
+        </association>
+        <collection property="OrderDetails" ofType="com.groupwork.Model.OrderDetail">
+            <id column="order_detail_id" property="Id" jdbcType="VARCHAR"/>
+            <result column="book_amount" property="BookAmount"/>
+            <association property="Book" javaType="com.groupwork.Model.Book">
+                <id column="book_id" property="Id" jdbcType="INTEGER"/>
+                <result column="name" property="Name"/>
+                <result column="pic_link" property="PicUrl"/>
+            </association>
+        </collection>
+    </resultMap>
+
+
+
+
+
+
+
+    <!--<update id="updateUserPassword" parameterType="com.groupwork.Model.UserSecurity">-->
+    <!--UPDATE address SET password = #{Password,jdbcType=VARCHAR} WHERE email = #{Email,jdbcType=VARCHAR}-->
+    <!--</update>-->
+
+
+
+</mapper>

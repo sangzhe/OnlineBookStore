@@ -10,11 +10,17 @@ public class OrderDetail implements Serializable {
     private Book Book;
     private int BookAmount;
 
-    public OrderDetail(String id, com.groupwork.Model.Book book, int bookAmount) {
-        Id = id;
-        Book = book;
-        BookAmount = bookAmount;
-    }
+//    public OrderDetail(String id, com.groupwork.Model.Book book, int bookAmount) {
+//        Id = id;
+//        Book = book;
+//        BookAmount = bookAmount;
+//    }
+//
+//    public OrderDetail(com.groupwork.Model.Book book, int bookAmount) {
+//        Id = UUID.randomUUID().toString();
+//        Book = book;
+//        BookAmount = bookAmount;
+//    }
 
     public void setId(String id) {
         Id = id;
@@ -31,6 +37,14 @@ public class OrderDetail implements Serializable {
     public void setBook(com.groupwork.Model.Book book) {
         Book = book;
     }
+
+//    public com.groupwork.Model.Book getBook() {
+//        return Book;
+//    }
+//
+//    public void setBook(com.groupwork.Model.Book book) {
+//        Book = book;
+//    }
 
     public int getBookAmount() {
         return BookAmount;

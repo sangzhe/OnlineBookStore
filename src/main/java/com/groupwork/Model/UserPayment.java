@@ -1,21 +1,15 @@
 package com.groupwork.Model;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by sangzhe on 2018/4/5.
  */
 public class UserPayment implements Serializable {
     private UserGeneral User;
-    private Payment Payment;
+    private List<Payment> Payments;
     private boolean IsInUse;
-
-
-    public UserPayment(UserGeneral user, com.groupwork.Model.Payment payment, boolean isInUse) {
-        User = user;
-        Payment = payment;
-        IsInUse = isInUse;
-    }
 
     public UserGeneral getUser() {
         return User;
@@ -25,12 +19,12 @@ public class UserPayment implements Serializable {
         User = user;
     }
 
-    public com.groupwork.Model.Payment getPayment() {
-        return Payment;
+    public List<Payment> getPayments() {
+        return Payments;
     }
 
-    public void setPayment(com.groupwork.Model.Payment payment) {
-        Payment = payment;
+    public void setPayments(List<Payment> payments) {
+        Payments = payments;
     }
 
     public boolean isInUse() {

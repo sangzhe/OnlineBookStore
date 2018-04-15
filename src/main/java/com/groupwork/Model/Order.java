@@ -2,6 +2,7 @@ package com.groupwork.Model;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -9,7 +10,7 @@ import java.util.UUID;
  */
 public class Order implements Serializable{
     private String Id;
-    private OrderDetail OrderDetail;
+    private List<OrderDetail> OrderDetails;
     private UserGeneral User;
     private Address ShippingAddress;
     private Address BillingAddress;
@@ -17,25 +18,14 @@ public class Order implements Serializable{
     private Date OrderDate;
     private float OrderPrice;
 
-    public Order(String id, com.groupwork.Model.OrderDetail orderDetail, UserGeneral user, Address shippingAddress, Address billingAddress, com.groupwork.Model.Payment payment, Date orderDate, float orderPrice) {
-        Id = id;
-        OrderDetail = orderDetail;
+    public Order(List<com.groupwork.Model.OrderDetail> orderDetails, UserGeneral user, Address shippingAddress, Address billingAddress, com.groupwork.Model.Payment payment, Date orderDate, float orderPrice) {
+        Id = UUID.randomUUID().toString();
+        OrderDetails = orderDetails;
         User = user;
         ShippingAddress = shippingAddress;
         BillingAddress = billingAddress;
         Payment = payment;
         OrderDate = orderDate;
-        OrderPrice = orderPrice;
-    }
-
-    public Order(com.groupwork.Model.OrderDetail orderDetail, UserGeneral user, Address shippingAddress, Address billingAddress, com.groupwork.Model.Payment payment, float orderPrice) {
-        Id = UUID.randomUUID().toString();
-        OrderDetail = orderDetail;
-        User = user;
-        ShippingAddress = shippingAddress;
-        BillingAddress = billingAddress;
-        Payment = payment;
-        OrderDate = new Date(new java.util.Date().getTime());
         OrderPrice = orderPrice;
     }
 
@@ -47,12 +37,12 @@ public class Order implements Serializable{
         Id = id;
     }
 
-    public com.groupwork.Model.OrderDetail getOrderDetail() {
-        return OrderDetail;
+    public List<com.groupwork.Model.OrderDetail> getOrderDetails() {
+        return OrderDetails;
     }
 
-    public void setOrderDetail(com.groupwork.Model.OrderDetail orderDetail) {
-        OrderDetail = orderDetail;
+    public void setOrderDetail(List<com.groupwork.Model.OrderDetail> orderDetails) {
+        OrderDetails = orderDetails;
     }
 
     public UserGeneral getUser() {

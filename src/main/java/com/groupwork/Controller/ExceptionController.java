@@ -5,6 +5,7 @@ import org.apache.shiro.ShiroException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletRequest;
  * Created by sangzhe on 2018/4/10.
  */
 @RestControllerAdvice
+@CrossOrigin
 public class ExceptionController {
     private static final Logger _logger = LoggerFactory.getLogger(ExceptionController.class);
 

@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import java.sql.Date;
 import java.util.Map;
@@ -47,13 +48,14 @@ public class UserService {
         UserSecurity new_user = new UserSecurity(Email,encrypted);
 
 
-        int n = userSecurityMapper.insertNewUserSecurity(new_user);
-
-        int m = 1/n;
-
-        n = userGeneralMapper.insertNewUserGeneral(new_user.getUserId());
-
-        m = 1/n;
+        try {
+            userSecurityMapper.insertNewUserSecurity(new_user);
+            userGeneralMapper.insertNewUserGeneral(new_user.getUserId());
+        }catch (Exception e){
+            _logger.info("(addNewAddressToUser)Error:"+e.getMessage());
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return -1;
+        }
 
         return 0;
     }

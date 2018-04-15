@@ -9,17 +9,18 @@ import java.util.UUID;
 public class Payment implements Serializable{
     private String Id;
     private int CardNumber;
-    private String Password;
     private String LastName;
     private String FirstName;
     private int SecurityNumber;
     private String Expire;
     private int Zipcode;
 
-    public Payment(String id, int cardNumber, String password, String lastName, String firstName, int securityNumber, String expire, int zipcode) {
+    public Payment() {
+    }
+
+    public Payment(String id, int cardNumber, String lastName, String firstName, int securityNumber, String expire, int zipcode) {
         Id = id;
         CardNumber = cardNumber;
-        Password = password;
         LastName = lastName;
         FirstName = firstName;
         SecurityNumber = securityNumber;
@@ -27,15 +28,18 @@ public class Payment implements Serializable{
         Zipcode = zipcode;
     }
 
-    public Payment(int cardNumber, String password, String lastName, String firstName, int securityNumber, String expire, int zipcode) {
+    public Payment(int cardNumber, String lastName, String firstName, int securityNumber, String expire, int zipcode) {
         Id = UUID.randomUUID().toString();
         CardNumber = cardNumber;
-        Password = password;
         LastName = lastName;
         FirstName = firstName;
         SecurityNumber = securityNumber;
         Expire = expire;
         Zipcode = zipcode;
+    }
+
+    public boolean check(){
+        return true;
     }
 
     public String getId() {
@@ -54,13 +58,6 @@ public class Payment implements Serializable{
         CardNumber = cardNumber;
     }
 
-    public String getPassword() {
-        return Password;
-    }
-
-    public void setPassword(String password) {
-        Password = password;
-    }
 
     public String getLastName() {
         return LastName;

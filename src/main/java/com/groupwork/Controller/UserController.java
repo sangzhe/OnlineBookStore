@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
  * Created by sangzhe on 2018/4/7.
  */
 @RestController
+@CrossOrigin
 @RequestMapping("/api")
 public class UserController {
     private static final Logger _logger = LoggerFactory.getLogger(UserController.class);
@@ -71,7 +72,7 @@ public class UserController {
     @RequestMapping(path="/401")
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public Result unauthorized() {
-        return new Result("Unauthorized", 401);
+        return Result.fail("Unauthorized", 401);
     }
 
 

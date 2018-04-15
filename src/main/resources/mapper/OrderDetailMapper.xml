@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.groupwork.Mapper.OrderDetailMapper">
+    
+    
+    <resultMap id="OrderDetailResult" type="com.groupwork.Model.OrderDetail">
+        <id column="id" property="Id" jdbcType="VARCHAR"/>
+        <result column="book_amount" property="BookAmount" jdbcType="INTEGER"/>
+        <association property="Book" javaType="com.groupwork.Model.Book">
+            <id column="book_id" property="Id" jdbcType="INTEGER"/>
+            <result column="name" property="Name"/>
+            <result column="pic_link" property="PicUrl"/>
+        </association>
+    </resultMap>
+
+
+    <select id="getOrderDetailsFromCartByEmail" parameterType="java.lang.String" resultMap="OrderDetailResult">
+        SELECT order_detail.id, order_detail.book_amount, book.id AS book_id,book.name,book.pic_link
+        from cart,user_security,order_detail,book
+        WHERE user_security.email =#{Email} AND user_security.user_id = cart.user_id AND cart.order_detail_id = order_detail.id AND order_detail.book_id = book.id
+    </select>
+
+    <select id="getOrderDetailById" parameterType="java.lang.String" resultMap="OrderDetailResult">
+        SELECT order_detail.id order_detail.book_amount ,book.id AS book_id,book.name , book.pic_link
+        FROM order_detail,book
+        WHERE order_detail.id = #{Id} AND order_detail.book_id = book.id
+    </select>
+
+    <insert id="insertOrderDetail">
+        INSERT INTO order_detail(id, book_id,book_amount) VALUES(#{Id},#{BookId},#{BookAmount})
+    </insert>
+
+    <delete id="deleteOrderDetail" parameterType="java.lang.String">
+        DELETE FROM order_detail WHERE id=#{Id}
+    </delete>
+
+
+
+
+    <!--<update id="updateUserPassword" parameterType="com.groupwork.Model.UserSecurity">-->
+    <!--UPDATE address SET password = #{Password,jdbcType=VARCHAR} WHERE email = #{Email,jdbcType=VARCHAR}-->
+    <!--</update>-->
+
+
+
+</mapper>

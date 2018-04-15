@@ -1,20 +1,16 @@
 package com.groupwork.Model;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by sangzhe on 2018/4/5.
  */
 public class UserAddress implements Serializable {
     private UserGeneral User;
-    private Address Address;
+    private List<Address> Addresses;
     private boolean IsInUse;
 
-    public UserAddress(UserGeneral user, com.groupwork.Model.Address address, boolean isInUse) {
-        User = user;
-        Address = address;
-        IsInUse = isInUse;
-    }
 
     public UserGeneral getUser() {
         return User;
@@ -24,12 +20,12 @@ public class UserAddress implements Serializable {
         User = user;
     }
 
-    public com.groupwork.Model.Address getAddress() {
-        return Address;
+    public List<Address> getAddresses() {
+        return Addresses;
     }
 
-    public void setAddress(com.groupwork.Model.Address address) {
-        Address = address;
+    public void setAddresses(List<Address> addresses) {
+        Addresses = addresses;
     }
 
     public boolean isInUse() {

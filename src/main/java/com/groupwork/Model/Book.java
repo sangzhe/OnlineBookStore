@@ -19,8 +19,12 @@ public class Book implements Serializable {
     private String Description;
     private String PicUrl;
     private int ISBN;
+    private int Stock;
 
-    public Book(int id, String name, String category, String author, Date pubDate, String press, float price, int totalComments, float rate, String description, String picUrl, int ISBN) {
+    public Book() {
+    }
+
+    public Book(int id, String name, String category, String author, Date pubDate, String press, float price, int totalComments, float rate, String description, String picUrl, int ISBN, int stock) {
         Id = id;
         Name = name;
         Category = category;
@@ -33,6 +37,7 @@ public class Book implements Serializable {
         Description = description;
         PicUrl = picUrl;
         this.ISBN = ISBN;
+        Stock = stock;
     }
 
     public Book(int id, String name, String author, float price, String picUrl) {
@@ -42,6 +47,7 @@ public class Book implements Serializable {
         Price = price;
         PicUrl = picUrl;
     }
+
 
     public int getId() {
         return Id;
@@ -137,6 +143,14 @@ public class Book implements Serializable {
 
     public void setISBN(int ISBN) {
         this.ISBN = ISBN;
+    }
+
+    public int getStock() {
+        return Stock;
+    }
+
+    public void setStock(int stock) {
+        Stock = stock;
     }
 
     @Override

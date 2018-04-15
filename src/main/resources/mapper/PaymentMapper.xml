@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.groupwork.Mapper.PaymentMapper">
+
+
+    <select id="getPaymentsByUsername" resultType="com.groupwork.Model.Payment" parameterType="java.lang.String">
+        SELECT *
+        FROM payment p,user_payment up
+        WHERE
+        up.is_in_use=1
+        AND p.id = up.payment_id
+        AND up.user_id=(SELECT id FROM user_security WHERE email=#{Email,jdbcType=VARCHAR})
+    </select>
+
+    <select id="getPaymentById" resultType="com.groupwork.Model.Payment" parameterType="java.lang.String">
+        SELECT *
+        FROM payment
+        WHERE
+        id=#{Id}
+    </select>
+
+    <insert id="insertPayment" parameterType="com.groupwork.Model.Payment">
+        INSERT INTO payment(id,card_number,last_name,first_name,security_number,expire,zipcode) VALUES(#{Id},#{CardNumber},#{LastName},#{FirstName},#{SecurityNumber},#{Expire},#{Zipcode})
+    </insert>
+    <insert id="insertUserPayment">
+        INSERT INTO user_payment(user_id,payment_id) VALUES (#{UserId},#{PaymentId})
+    </insert>
+
+    <update id="deletePayment" parameterType="java.lang.String">
+        UPDATE user_payment SET is_in_use = 0 WHERE payment_id = #{PaymentId}
+    </update>
+
+
+    <!--<update id="updateUserPassword" parameterType="com.groupwork.Model.UserSecurity">-->
+    <!--UPDATE address SET password = #{Password,jdbcType=VARCHAR} WHERE email = #{Email,jdbcType=VARCHAR}-->
+    <!--</update>-->
+
+
+
+</mapper>
