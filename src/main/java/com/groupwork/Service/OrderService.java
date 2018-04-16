@@ -23,6 +23,8 @@ public class OrderService {
     private static final Logger _logger = LoggerFactory.getLogger(OrderService.class);
 
     @Autowired
+    BookMapper bookMapper;
+    @Autowired
     OrderDetailMapper orderDetailMapper;
 
     @Autowired
@@ -37,6 +39,14 @@ public class OrderService {
     @Autowired
     UserGeneralMapper userGeneralMapper;
 
+
+    public int addToCart(String Email,int bookId,int bookAmount){
+        String Id = UUID.randomUUID().toString();
+        UserGeneral user = userGeneralMapper.getUserByEmail(Email);
+        int n = orderDetailMapper.insertOrderDetail(Id,bookId,bookAmount);
+        int m = orderDetailMapper.insertOrderDetailToCart(user.getId(),Id);
+        return 0;
+    }
     public List<OrderDetail> getAllOrderDetailsByEmail(String Email){
         return orderDetailMapper.getOrderDetailsFromCartByEmail(Email);
     }
@@ -50,6 +60,14 @@ public class OrderService {
         return orderDetailMapper.deleteOrderDetail(Id);
     }
 
+    public List<OrderDetail> getOrderDetailsFromCartByEmail(String Email){
+        return orderDetailMapper.getOrderDetailsFromCartByEmail(Email);
+    }
+
+    public List<Order> getAllOrdersByEmail(String Email){
+        return orderMapper.getAllOrdersByEmail(Email);
+    }
+
     @Transactional(rollbackFor = Exception.class)
     public int addOrder(String Email,String PaymentId,String BillingAddressId,String ShippingAddressId,String[] OrderDetailIds){
         try {
@@ -60,23 +78,24 @@ public class OrderService {
                 if (orderDetail.getBook().getStock() < orderDetail.getBookAmount()) {
                     throw new Exception("out of stock");
                 }
+                orderDetailMapper.deleteOrderDetailFromCart(orderDetail.getId());
+                bookMapper.updateBookStock(orderDetail.getBook().getId(),orderDetail.getBook().getStock()-orderDetail.getBookAmount());
                 price += orderDetail.getBookAmount()*orderDetail.getBook().getPrice();
                 orderDetails.add(orderDetail);
             }
 
             UserGeneral user = userGeneralMapper.getUserByEmail(Email);
             Payment payment = paymentMapper.getPaymentById(PaymentId);
-            Address billingAddress = addressMapper.getAddressById(BillingAddressId);
-            Address shippingAddress = addressMapper.getAddressById(ShippingAddressId);
 
             if(!payment.check()){
                 throw new Exception("Payment denied");
             }
 
-            Order order = new Order(orderDetails,user,shippingAddress,billingAddress,payment,new Date(System.currentTimeMillis()),price);
-
-            orderMapper.insertOrder(order);
-
+            String OrderId = UUID.randomUUID().toString();
+//            Order order = new Order(orderDetails,user,shippingAddress,billingAddress,payment,new Date(System.currentTimeMillis()),price);
+            for(String OrderDetailId:OrderDetailIds) {
+                orderMapper.insertOrder(OrderId, OrderDetailId, PaymentId, BillingAddressId, ShippingAddressId, user.getId(), price, new Date(System.currentTimeMillis()));
+            }
         }catch (Exception e){
             _logger.info("(addOrder)Error:"+e.getMessage());
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();

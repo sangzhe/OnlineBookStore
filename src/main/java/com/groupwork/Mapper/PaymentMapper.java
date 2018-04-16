@@ -15,9 +15,9 @@ import java.util.List;
 public interface PaymentMapper {
     List<Payment> getPaymentsByUsername(String Email);
 
-    int insertPayment(@Param("Payment") Payment Payment);
+    int insertPayment(Payment Payment);
 
-    int insertUserPayment(@Param("PaymentId") String PaymentId,@Param("Email") String Email);
+    int insertUserPayment(@Param("PaymentId") String PaymentId,@Param("UserId") String UserId);
 
     int deletePayment(@Param("PaymentId") String PaymentId);
 

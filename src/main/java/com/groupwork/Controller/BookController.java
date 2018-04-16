@@ -2,7 +2,7 @@ package com.groupwork.Controller;
 
 import com.groupwork.Model.Book;
 import com.groupwork.Model.Result;
-import com.groupwork.Service.BrowsingService;
+import com.groupwork.Service.BookService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class BookController {
     private static final Logger _logger = LoggerFactory.getLogger(BookController.class);
 
     @Autowired
-    BrowsingService bookService;
+    BookService bookService;
 
     @RequestMapping(path="/book/all")
     public Result allBooks(){
@@ -36,6 +36,8 @@ public class BookController {
 
     @RequestMapping(path="/book/search")
     public Result searchBooksByCondition(@RequestParam Map<String, String> params){
+        _logger.info("Controller.BookController.searchBooksByCondition");
+        _logger.info(params.toString());
         int limit = Integer.parseInt(params.get("limit"));
         int offset  = Integer.parseInt(params.get("offset"));
         String name ="";

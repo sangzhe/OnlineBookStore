@@ -13,9 +13,9 @@ import java.util.List;
  * Created by sangzhe on 2018/4/11.
  */
 @Service
-public class BrowsingService {
+public class BookService {
 
-    private static final Logger _logger = LoggerFactory.getLogger(BrowsingService.class);
+    private static final Logger _logger = LoggerFactory.getLogger(BookService.class);
 
     @Autowired
     BookMapper bookMapper;
@@ -51,6 +51,10 @@ public class BrowsingService {
         List<Book> books =  bookMapper.getBooks(name,author,category,sortBy,limit,offset);
         _logger.info(books.toString());
         return books;
+    }
+
+    public int updateBookStock(int bookId,int stock){
+        return bookMapper.updateBookStock(bookId,stock);
     }
 
 }

@@ -18,7 +18,16 @@
             <id column="user_id" property="Id" jdbcType="VARCHAR"/>
         </association>
         <association property="ShippingAddress" resultMap="AddressResult"/>
-
+        <association property="BillingAddress" resultMap="AddressResult"/>
+        <association property="Payment" javaType="com.groupwork.Model.Payment">
+            <id column="payment_id" property="Id"/>
+            <result column="card_number" property="CardNumber"/>
+            <result column="last_name" property="LastName"/>
+            <result column="first_name" property="FirstName"/>
+            <result column="security_number" property="SecurityNumber"/>
+            <result column="expire" property="Expire"/>
+            <result column="zipcode" property="Zipcode"/>
+        </association>
         <collection property="OrderDetails" ofType="com.groupwork.Model.OrderDetail">
             <id column="order_detail_id" property="Id" jdbcType="VARCHAR"/>
             <result column="book_amount" property="BookAmount"/>
@@ -31,15 +40,8 @@
     </resultMap>
 
     <select id="getAllOrdersByEmail" parameterType="java.lang.String">
-        SELECT orders.id, date, order_price ,user_id,order_detail_id,book_amount,book_id,name,pic_link
-        FROM orders ,order_detail, user_security
-        WHERE user_security.email = #{Email} AND orders.user_id = user_security.user_id AND orders.order_detail_id = order_detail.id
+        SELECT 
     </select>
-
-    <insert id="insertOrder">
-        INSERT orders(id,order_detail_id,shipping_address_id,billing_address_id,order_date,order_price,payment_id,user_id)
-        VALUES (#{OrderId},#{OrderDetailId},#{ShippingAddressId},#{BillingAddressId},#{Date},#{OrderPrice},#{PaymentId},#{UserId})
-    </insert>
 
 
 

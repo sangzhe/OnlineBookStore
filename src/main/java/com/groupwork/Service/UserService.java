@@ -64,8 +64,8 @@ public class UserService {
         return userSecurityMapper.getUserSecurityById(Id);
     }
 
-    public int modifyUserPassword(String Id,String Password){
-        UserSecurity user = this.getUserSecurityById(Id);
+    public int modifyUserPassword(String Email,String Password){
+        UserSecurity user = this.getUserSecurityByEmail(Email);
         String new_password = MD5utils.MD5EncodeUtf8(Password);
         user.setPassword(new_password);
         return userSecurityMapper.updateUserPassword(user);
@@ -76,9 +76,10 @@ public class UserService {
         return userGeneralMapper.getUserByEmail(Email);
     }
 
-    public int modifyUserProfile(String Id, Map<String,String> attributes){
-        UserGeneral user = userGeneralMapper.getUserById(Id);
+    public int modifyUserProfile(String Email, Map<String,String> attributes){
+        UserGeneral user = userGeneralMapper.getUserByEmail(Email);
         for(Map.Entry<String,String> entry:attributes.entrySet()){
+            if(entry.getValue()=="") continue;
             switch (entry.getKey()){
                 case "Gender": user.setGender(entry.getValue());break;
                 case "Birth":user.setBirth(Date.valueOf(entry.getValue()));break;

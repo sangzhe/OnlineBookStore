@@ -25,8 +25,8 @@ public class ExceptionController {
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(ShiroException.class)
     public Result handle401(ShiroException e) {
-        _logger.info("ExceptionController.handle401");
-        _logger.info(e.getMessage());
+        _logger.debug("ExceptionController.handle401");
+        _logger.debug(e.getMessage());
         return Result.fail(e.getMessage(), 401);
     }
 
@@ -35,8 +35,8 @@ public class ExceptionController {
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public Result globalException(HttpServletRequest request, Throwable ex) {
-        _logger.info("ExceptionController.globalException");
-        _logger.info(ex.getMessage());
+        _logger.debug("ExceptionController.globalException");
+        _logger.debug(ex.getMessage());
         return new Result("other exception:"+ex.getMessage(), 400);
     }
 

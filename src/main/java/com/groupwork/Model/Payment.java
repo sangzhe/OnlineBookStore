@@ -8,17 +8,17 @@ import java.util.UUID;
  */
 public class Payment implements Serializable{
     private String Id;
-    private int CardNumber;
+    private String CardNumber;
     private String LastName;
     private String FirstName;
-    private int SecurityNumber;
+    private String SecurityNumber;
     private String Expire;
     private int Zipcode;
 
     public Payment() {
     }
 
-    public Payment(String id, int cardNumber, String lastName, String firstName, int securityNumber, String expire, int zipcode) {
+    public Payment(String id, String cardNumber, String lastName, String firstName, String securityNumber, String expire, int zipcode) {
         Id = id;
         CardNumber = cardNumber;
         LastName = lastName;
@@ -28,7 +28,7 @@ public class Payment implements Serializable{
         Zipcode = zipcode;
     }
 
-    public Payment(int cardNumber, String lastName, String firstName, int securityNumber, String expire, int zipcode) {
+    public Payment(String cardNumber, String lastName, String firstName, String securityNumber, String expire, int zipcode) {
         Id = UUID.randomUUID().toString();
         CardNumber = cardNumber;
         LastName = lastName;
@@ -50,11 +50,11 @@ public class Payment implements Serializable{
         Id = id;
     }
 
-    public int getCardNumber() {
+    public String getCardNumber() {
         return CardNumber;
     }
 
-    public void setCardNumber(int cardNumber) {
+    public void setCardNumber(String cardNumber) {
         CardNumber = cardNumber;
     }
 
@@ -75,11 +75,11 @@ public class Payment implements Serializable{
         FirstName = firstName;
     }
 
-    public int getSecurityNumber() {
+    public String getSecurityNumber() {
         return SecurityNumber;
     }
 
-    public void setSecurityNumber(int securityNumber) {
+    public void setSecurityNumber(String securityNumber) {
         SecurityNumber = securityNumber;
     }
 

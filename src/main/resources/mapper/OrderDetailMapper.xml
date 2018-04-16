@@ -9,6 +9,7 @@
         <association property="Book" javaType="com.groupwork.Model.Book">
             <id column="book_id" property="Id" jdbcType="INTEGER"/>
             <result column="name" property="Name"/>
+            <result column="stock" property="Stock"/>
             <result column="pic_link" property="PicUrl"/>
         </association>
     </resultMap>
@@ -21,7 +22,7 @@
     </select>
 
     <select id="getOrderDetailById" parameterType="java.lang.String" resultMap="OrderDetailResult">
-        SELECT order_detail.id order_detail.book_amount ,book.id AS book_id,book.name , book.pic_link
+        SELECT order_detail.id ,book_amount ,book.id AS book_id,name , stock,pic_link
         FROM order_detail,book
         WHERE order_detail.id = #{Id} AND order_detail.book_id = book.id
     </select>
@@ -30,6 +31,14 @@
         INSERT INTO order_detail(id, book_id,book_amount) VALUES(#{Id},#{BookId},#{BookAmount})
     </insert>
 
+    <insert id ="insertOrderDetailToCart">
+        INSERT INTO cart(user_id,order_detail_id) VALUES (#{UserId},#{OrderDetailId})
+    </insert>
+
+
+    <delete id="deleteOrderDetailFromCart" parameterType="java.lang.String">
+        DELETE  FROM cart WHERE order_detail_id = #{Id}
+    </delete>
     <delete id="deleteOrderDetail" parameterType="java.lang.String">
         DELETE FROM order_detail WHERE id=#{Id}
     </delete>

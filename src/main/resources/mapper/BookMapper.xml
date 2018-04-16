@@ -49,6 +49,10 @@
         LIMIT ${limit},${offset}
     </select>
 
+    <update id="updateBookStock" parameterType="com.groupwork.Model.Book">
+        UPDATE book SET stock=#{Stock,jdbcType=INTEGER} WHERE id=#{bookId,jdbcType=INTEGER}
+    </update>
+
 
 
 

@@ -46,7 +46,7 @@ public class ShiroConfig {
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
 
         // 其他的
-        filterChainDefinitionMap.put("/api/hello", "jwt");
+        filterChainDefinitionMap.put("/api/access_control", "jwt");
 
         // 访问401和404页面不通过我们的Filter
         filterChainDefinitionMap.put("/401", "anon");

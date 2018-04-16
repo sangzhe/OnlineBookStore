@@ -21,6 +21,8 @@ public class Result<T> implements Serializable{
         this.code = code;
     }
 
+    public static Result success(){return new Result("Success",100);}
+
     public static <T>Result success(T t){
         return new Result("Success",100,t);
     }

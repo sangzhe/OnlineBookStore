@@ -15,9 +15,9 @@ import java.util.List;
 public interface AddressMapper {
     List<Address> getAddressesByUsername(String Email);
 
-    int insertAddress(@Param("Address") Address Address);
+    int insertAddress(Address Address);
 
-    int insertUserAddress(@Param("AddressId") String AddressId,@Param("Email") String Email);
+    int insertUserAddress(@Param("AddressId") String AddressId,@Param("UserId") String UserId);
 
     int deleteAddress(@Param("AddressId") String AddressId);
 

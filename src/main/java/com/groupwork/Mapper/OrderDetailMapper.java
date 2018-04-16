@@ -20,4 +20,8 @@ public interface OrderDetailMapper {
     OrderDetail getOrderDetailById(String Id);
 
     List<OrderDetail> getOrderDetailsFromCartByEmail(String Email);
+
+    int deleteOrderDetailFromCart(String Id);
+
+    int insertOrderDetailToCart(@Param("UserId") String UserId,@Param("OrderDetailId") String OrderDetailId);
 }

@@ -2,17 +2,26 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.groupwork.Mapper.PaymentMapper">
 
+    <resultMap id="PaymentResult" type="com.groupwork.Model.Payment">
+        <id column="id" property="Id"/>
+        <result column="card_number" property="CardNumber"/>
+        <result column="last_name" property="LastName"/>
+        <result column="first_name" property="FirstName"/>
+        <result column="security_number" property="SecurityNumber"/>
+        <result column="expire" property="Expire"/>
+        <result column="zipcode" property="Zipcode"/>
+    </resultMap>
 
-    <select id="getPaymentsByUsername" resultType="com.groupwork.Model.Payment" parameterType="java.lang.String">
-        SELECT *
-        FROM payment p,user_payment up
+    <select id="getPaymentsByUsername" resultMap="PaymentResult" parameterType="java.lang.String">
+        SELECT payment.*
+        FROM payment,user_payment
         WHERE
-        up.is_in_use=1
-        AND p.id = up.payment_id
-        AND up.user_id=(SELECT id FROM user_security WHERE email=#{Email,jdbcType=VARCHAR})
+        is_in_use=1
+        AND id = payment_id
+        AND user_id=(SELECT user_id FROM user_security WHERE email=#{Email,jdbcType=VARCHAR})
     </select>
 
-    <select id="getPaymentById" resultType="com.groupwork.Model.Payment" parameterType="java.lang.String">
+    <select id="getPaymentById" resultMap="PaymentResult" parameterType="java.lang.String">
         SELECT *
         FROM payment
         WHERE

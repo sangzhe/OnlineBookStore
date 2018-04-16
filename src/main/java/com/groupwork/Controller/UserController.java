@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 /**
  * Created by sangzhe on 2018/4/7.
  */
@@ -67,6 +69,22 @@ public class UserController {
         }else{
             return Result.success("Resgister succeed");
         }
+    }
+
+    @RequestMapping("/user/modify_password")
+    public Result modifyPassword(@RequestParam("username") String username,@RequestParam("new_password") String new_password){
+        int n = userService.modifyUserPassword(username,new_password);
+        if(n==0)return Result.fail("Failed",401);
+        return Result.success();
+    }
+
+    @RequestMapping("/user/modify_profile")
+    public Result modifyUserProfile(@RequestParam Map<String,String> params){
+        String Email = params.get("username");
+        params.remove("username");
+        int n =userService.modifyUserProfile(Email,params);
+        if(n==0)return Result.fail("Failed",401);
+        return Result.success();
     }
 
     @RequestMapping(path="/401")
