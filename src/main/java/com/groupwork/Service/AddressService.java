@@ -29,7 +29,7 @@ public class AddressService {
     UserGeneralMapper userGeneralMapper;
 
     @Transactional(rollbackFor = Exception.class)
-    public int addNewAddressToUser(String street, String street2, String city, String state, int zipcode,String Email){
+    public String addNewAddressToUser(String street, String street2, String city, String state, int zipcode,String Email){
         _logger.info("Service.AddressService.addNewAddressToUser");
         Address address = new Address(street, street2, city, state, zipcode);
         String AddressId = address.getId();
@@ -41,11 +41,11 @@ public class AddressService {
         }catch (Exception e){
             _logger.info("(addNewAddressToUser)Error:"+e.getMessage());
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return -1;
+            return "Error to add";
         }
 
 
-        return 0;
+        return AddressId;
 
     }
 

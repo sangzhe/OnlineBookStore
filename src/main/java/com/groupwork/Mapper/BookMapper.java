@@ -30,7 +30,7 @@ public interface BookMapper {
      * @param offset
      * @return
      */
-    List<Book> getBooks(@Param("name") String name, @Param("author") String author,@Param("category") String category,@Param("sortBy") String sortBy, @Param("limit") int limit,@Param("offset") int offset);
+    List<Book> getBooksByCondistion(@Param("name") String name, @Param("author") String author,@Param("category") String category,@Param("sortBy") String sortBy, @Param("limit") int limit,@Param("offset") int offset);
 
     int updateBookStock(@Param("bookId") int bookId,@Param("Stock") int Stock);
 }

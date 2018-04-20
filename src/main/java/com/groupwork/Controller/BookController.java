@@ -3,6 +3,7 @@ package com.groupwork.Controller;
 import com.groupwork.Model.Book;
 import com.groupwork.Model.Result;
 import com.groupwork.Service.BookService;
+import com.groupwork.Service.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,24 @@ public class BookController {
 
     @Autowired
     BookService bookService;
+
+    @Autowired
+    OrderService orderService;
+
+
+    @RequestMapping(path = "/book/MostLiked/{Gender}")
+    public Result getMostLikedByGender(@PathVariable String Gender){
+        return Result.success(orderService.getMostLikedByGender(Gender));
+    }
+    @RequestMapping(path = "/book/top5selling")
+    public Result top5Book(){
+        _logger.info("Controller.BookController.top5selling");
+        List<Book> books = orderService.getTopSelling5();
+        if(books == null){
+            return Result.fail("No books",300);
+        }
+        return Result.success(books);
+    }
 
     @RequestMapping(path="/book/all")
     public Result allBooks(){

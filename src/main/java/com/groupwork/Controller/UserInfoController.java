@@ -63,9 +63,9 @@ public class UserInfoController {
         String LastName=params.get("LastName");
         String FirstName=params.get("FirstName");
         int Zipcode=Integer.parseInt(params.get("Zipcode"));
-        int n = paymentService.addNewPaymentToUser(CardNumber,LastName,FirstName,SecurityNumber,Expire,Zipcode,UserEmail);
-        if(n==0){
-            return Result.success();
+        String result = paymentService.addNewPaymentToUser(CardNumber,LastName,FirstName,SecurityNumber,Expire,Zipcode,UserEmail);
+        if(!result.equals("Error to add")){
+            return Result.success(result);
         }else{
             return Result.fail("Error in adding new payment",401);
         }
@@ -101,9 +101,9 @@ public class UserInfoController {
         String City = params.get("City");
         String State = params.get("State");
         int Zipcode = Integer.parseInt(params.get("Zipcode"));
-        int n = addressService.addNewAddressToUser(Street, Street2, City, State, Zipcode, UserEmail);
-        if (n == 0) {
-            return Result.success();
+        String result = addressService.addNewAddressToUser(Street, Street2, City, State, Zipcode, UserEmail);
+        if (!result.equals("Error to add")) {
+            return Result.success(result);
         } else {
             return Result.fail("Error in adding new payment", 401);
         }

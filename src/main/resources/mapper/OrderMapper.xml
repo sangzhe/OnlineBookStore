@@ -41,6 +41,34 @@
         VALUES (#{OrderId},#{OrderDetailId},#{ShippingAddressId},#{BillingAddressId},#{Date},#{OrderPrice},#{PaymentId},#{UserId})
     </insert>
 
+    <select id="getTopSellingBook" resultMap="com.groupwork.Mapper.BookMapper.BookIntro">
+        SELECT book.id,name,author,new_price, rate, pic_link
+        FROM book,order_detail,orders
+        WHERE
+        <![CDATA[
+        CURRENT_DATE -Date(orders.order_date) <= 7
+        ]]>
+        AND
+        book.id = order_detail.book_id AND order_detail.id = orders.order_detail_id
+        GROUP BY book.id
+        ORDER BY SUM(book_amount) DESC
+        LIMIT 5
+</select>
+
+    <select id="getPreferenceByGender" resultMap="com.groupwork.Mapper.BookMapper.BookIntro">
+        SELECT book.id,name,author,new_price, rate, pic_link
+        FROM book,order_detail,orders,user_general
+        WHERE
+        gender=#{Gender} AND
+        <![CDATA[
+        CURRENT_DATE -Date(orders.order_date) <= 7
+        ]]>
+        AND book.id = order_detail.book_id AND order_detail.id = orders.order_detail_id AND orders.user_id = user_general.id
+        GROUP BY book.id
+        ORDER BY SUM(book_amount) DESC
+        LIMIT 1
+    </select>
+
 
 
 

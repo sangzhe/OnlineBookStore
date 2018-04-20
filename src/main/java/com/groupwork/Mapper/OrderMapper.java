@@ -1,5 +1,6 @@
 package com.groupwork.Mapper;
 
+import com.groupwork.Model.Book;
 import com.groupwork.Model.Order;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -25,4 +26,9 @@ public interface OrderMapper {
                     @Param("Date")Date Date);
 
     List<Order> getAllOrdersByEmail(String Email);
+
+
+    List<Book> getTopSellingBook();
+
+    Book getPreferenceByGender(@Param("Gender") String Gender);
 }

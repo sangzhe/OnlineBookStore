@@ -30,7 +30,6 @@ public class BookService {
     public List<Book> getBook(String name,String author,String category,String sortBy,int limit,int offset){
         _logger.info("Service.BrowsingService.getBooks");
 
-        _logger.info("name:"+name+" category: "+category+" sortBy:"+sortBy+ "limit:"+limit+","+offset);
 
         if(name.equals("")){
             name = null;
@@ -48,7 +47,9 @@ public class BookService {
         if(sortBy.equals("")){
             sortBy="rate";
         }
-        List<Book> books =  bookMapper.getBooks(name,author,category,sortBy,limit,offset);
+        _logger.info("name:"+name+" category: "+category+" sortBy:"+sortBy+ "limit:"+limit+","+offset);
+
+        List<Book> books =  bookMapper.getBooksByCondistion(name,author,category,sortBy,limit,offset);
         _logger.info(books.toString());
         return books;
     }

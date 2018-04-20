@@ -5,6 +5,7 @@
         <id column="id" property="Id" jdbcType="INTEGER"/>
         <result column="name" property="Name" jdbcType="VARCHAR"/>
         <result column="new_price" property="Price" jdbcType="FLOAT"/>
+        <result column="rate" property="Rate" />
         <result column="pic_link" property="PicUrl" jdbcType="VARCHAR"/>
     </resultMap>
 
@@ -31,8 +32,8 @@
         WHERE id= #{Id,jdbcType=INTEGER}
     </select>
 
-    <select id="getBooks" resultMap="BookIntro">
-        SELECT id,name,author,new_price,pic_link
+    <select id="getBooksByCondistion" resultMap="BookIntro">
+        SELECT id,name,author,new_price, rate, pic_link
         from book
         <where>
             <if test="name != null">

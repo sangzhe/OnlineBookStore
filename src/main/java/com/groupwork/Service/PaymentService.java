@@ -26,7 +26,7 @@ public class PaymentService {
     UserGeneralMapper userGeneralMapper;
 
 //    @Transactional(rollbackFor = Exception.class)
-    public int addNewPaymentToUser(String cardNumber, String lastName, String firstName, String securityNumber, String expire, int zipcode,String Email){
+    public String addNewPaymentToUser(String cardNumber, String lastName, String firstName, String securityNumber, String expire, int zipcode,String Email){
         _logger.info("Service.AddressService.addNewAddressToUser");
         Payment payment = new Payment(cardNumber, lastName, firstName, securityNumber, expire, zipcode);
         String PaymentId = payment.getId();
@@ -38,11 +38,11 @@ public class PaymentService {
         }catch (Exception e){
             _logger.info("(addNewAddressToUser)Error:"+e.getMessage());
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return -1;
+            return "Error to add";
         }
 
 
-        return 0;
+        return PaymentId;
 
     }
 
